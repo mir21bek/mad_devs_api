@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:17.2-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+#    volumes:
+#      -  Тут нужно написать путь до файла где будет хранится данные вне докера.
