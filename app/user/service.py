@@ -9,7 +9,7 @@ from datetime import datetime as dt, timedelta
 from app.exception import UserNotFoundException, UserNotCorrectPasswordException, TokenNotCorrect, TokenExpired
 from app.settings import Settings
 from app.user.models import Patient
-from app.user.schemas import PatientLoginSchema, PatientCreateSchema, DiagnosticSchema
+from app.user.schemas import PatientLoginSchema, PatientCreateSchema
 from app.user.repository import PatientRepository
 
 
@@ -31,10 +31,6 @@ class AuthService:
         self._validate_auth_user(user, password)
         access_token = self._generate_access_token(user_id=user.id)
         return PatientLoginSchema(user_id=user.id, access_token=access_token)
-
-
-    async def get_patient_diagnostic(self, role: str, diagnoses: List[Patient]) -> DiagnosticSchema | None:
-
 
 
     @staticmethod

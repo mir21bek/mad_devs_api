@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     DB_PORT = 5432
     DB_HOST = 'db'
     DB_PASSWORD = 'password'
-    DB_DRIVER = 'postgresql+psycopg2'
+    DB_DRIVER = 'postgresql+asyncpg'
     JWT_SECRET_KEY = 'secret_key'
     JWT_ENCODE_ALGORITHM = 'HS256'
 
