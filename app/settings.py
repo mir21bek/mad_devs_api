@@ -2,11 +2,11 @@ from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
 class Settings(BaseSettings):
-    DB_NAME = 'mad'
-    DB_USER = 'mad12345'
-    DB_PORT = 5432
+    DB_NAME = 'mad_devs'
+    DB_USER = 'postgres'
+    DB_PORT = 5433
     DB_HOST = 'db'
-    DB_PASSWORD = 'password'
+    DB_PASSWORD = 'mad12345'
     DB_DRIVER = 'postgresql+asyncpg'
     JWT_SECRET_KEY = 'secret_key'
     JWT_ENCODE_ALGORITHM = 'HS256'

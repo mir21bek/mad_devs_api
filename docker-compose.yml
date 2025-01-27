@@ -2,14 +2,19 @@ services:
   app:
     build: .
     ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
+      - "8080:8080"
+    depends_on:
+      - db
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080
 
   db:
     image: postgres:17.2-alpine
     restart: always
     ports:
-      - "5432:5432"
+      - "5433:5433"
+    environment:
+      POSTGRES_DB: 'mad_devs'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'mad12345'
 #    volumes:
 #      -  Тут нужно написать путь до файла где будет хранится данные вне докера.
