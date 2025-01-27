@@ -14,3 +14,6 @@ class TokenNotCorrect(Exception):
 
 class TokenExpired(Exception):
     detail = "Token is expired"
+
+class RoleNotFoundException(Exception):
+    detail = "Role not found or you'r not permission for this operation"

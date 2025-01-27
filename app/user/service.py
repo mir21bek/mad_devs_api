@@ -6,15 +6,16 @@ from sqlalchemy import select
 from jose import jwt, JWTError
 from datetime import datetime as dt, timedelta
 
-from app.exception import UserNotFoundException, UserNotCorrectPasswordException, TokenNotCorrect, TokenExpired
+from app.exception import UserNotFoundException, UserNotCorrectPasswordException, TokenNotCorrect, TokenExpired, \
+    RoleNotFoundException
 from app.settings import Settings
 from app.user.models import Patient
-from app.user.schemas import PatientLoginSchema, PatientCreateSchema
+from app.user.schemas import PatientLoginSchema, PatientCreateSchema, DiagnoseSchema
 from app.user.repository import PatientRepository
 
 
 @dataclass
-class AuthService:
+class PatientService:
     settings = Settings
     user_repository = PatientRepository
 
@@ -31,6 +32,14 @@ class AuthService:
         self._validate_auth_user(user, password)
         access_token = self._generate_access_token(user_id=user.id)
         return PatientLoginSchema(user_id=user.id, access_token=access_token)
+
+    async def get_diagnose_list(self, role_name) -> DiagnoseSchema:
+        role = await self.user_repository.get_user_role(role_name)
+        if not role_name:
+            raise RoleNotFoundException
+        diagnoses = await self.user_repository.get_diagnose_by_user_role(role_name)
+        return DiagnoseSchema(user_role=role, user_diagnose=[diagnose.title for diagnose in diagnoses])
+
 
 
     @staticmethod

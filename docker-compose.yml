@@ -11,10 +11,10 @@ services:
     image: postgres:17.2-alpine
     restart: always
     ports:
-      - "5433:5432"
+      - "5432:5433"
     environment:
       POSTGRES_DB: 'mad_devs'
-      POSTGRES_USER: 'postgres'
+      POSTGRES_USER: 'devs'
       POSTGRES_PASSWORD: 'mad12345'
 #    volumes:
 #      -  Тут нужно написать путь до файла где будет хранится данные вне докера.
