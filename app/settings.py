@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 class Settings(BaseSettings):
     DB_NAME = 'mad_devs'
     DB_USER = 'postgres'
-    DB_PORT = 5433
+    DB_PORT = 5432
     DB_HOST = 'db'
     DB_PASSWORD = 'mad12345'
     DB_DRIVER = 'postgresql+asyncpg'
