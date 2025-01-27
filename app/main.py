@@ -13,12 +13,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-app.router(user_router)
+app.include_router(user_router)
 
-app.get("/ping/app")
+@app.get("/ping/app")
 async def ping_app():
     return {"result": "App is working"}
 
-app.get("/ping/db")
+@app.get("/ping/db")
 async def ping_db(patient_repository: PatientRepository = Depends(get_patient_repository)):
     await patient_repository.ping_db()

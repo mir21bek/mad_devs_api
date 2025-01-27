@@ -1,8 +1,5 @@
 import datetime
 from dataclasses import dataclass
-from typing import List
-
-from sqlalchemy import select
 from jose import jwt, JWTError
 from datetime import datetime as dt, timedelta
 

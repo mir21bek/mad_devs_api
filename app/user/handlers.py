@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends
-from app.services.patient_service import get_patient_service, PatientService
-from app.schemas.patient import PatientCreateSchema, PatientLoginSchema, DiagnoseSchema
+from app.dependecy import get_patient_service
+from app.user.service import PatientService
+from app.user.schemas import PatientCreateSchema, PatientLoginSchema, DiagnoseSchema
 
 router = APIRouter()
 
-@router.post("/register", response_model=PatientLoginSchema)
+@router.post("/register", response_model=PatientCreateSchema)
 async def register_user(
     username: str,
     password: str,
