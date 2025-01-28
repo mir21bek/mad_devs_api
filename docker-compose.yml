@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build: .
@@ -6,15 +8,21 @@ services:
     depends_on:
       - db
     command: uvicorn app.main:app --host 0.0.0.0 --port 8080
+    volumes:
+      - .:/app
 
   db:
-    image: postgres:17.2-alpine
+    image: postgres:latest
+    container_name: db-postgres
     restart: always
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: 'mad_devs'
-      POSTGRES_USER: 'devs'
-      POSTGRES_PASSWORD: 'mad12345'
-#    volumes:
-#      -  Тут нужно написать путь до файла где будет хранится данные вне докера.
+      POSTGRES_DB: mad_devs
+      POSTGRES_USER: core
+      POSTGRES_PASSWORD: mad12345
+    volumes:
+      -  postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
